@@ -1,0 +1,21 @@
+﻿@model PatientModel;
+@{
+    ViewData["Title"] = "Adicionar paciente";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Cadastrar contato</h1> 
+</div>
+
+<form asp-controller="Patient" asp.action="Create" method="post">
+
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o nome do paciente">       
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div>
+    </br>
+
+  <button type="submit" class="btn btn-outline-info btn-block">Adicionar</button>
+  <a class= "btn btn-outline-dark btn-block" asp-controller = "Patient" asp-action= "Index" role="button">Voltar</a>
+</form>
