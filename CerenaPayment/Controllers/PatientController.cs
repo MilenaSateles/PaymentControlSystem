@@ -15,7 +15,8 @@ namespace CerenaPayment.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<PatientModel> patient = _patientRepository.SearchAll();
+            return View(patient);
         }
 
         public IActionResult Create()
@@ -45,5 +46,61 @@ namespace CerenaPayment.Controllers
             }
         }
 
+        public IActionResult Edit(int id)
+        {
+            PatientModel patient = _patientRepository.ListById(id);
+            return View(patient);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(PatientModel patient)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    patient = _patientRepository.Update(patient);
+                    TempData["MensagemSucesso"] = "Paciente atualizado com sucesso";
+                    return RedirectToAction("Index");
+                }
+                return View(patient);
+            }
+
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Não foi possível atualizar o paciente, " +
+                    $"tente novamente! Detalhe do erro {erro.Message}:";
+                return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult ConfirmDelete(int id)
+        {
+            PatientModel patient = _patientRepository.ListById(id);
+            return View(patient);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                bool deleted = _patientRepository.Delete(id);
+                if (deleted)
+                {
+                    TempData["MensagemSucesso"] = "Paciente apagado com sucesso";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Não foi possível apagar o paciente";
+                }
+                return RedirectToAction("Index");
+            }
+
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Não foi possível apagar o paciente, mais detalhes do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

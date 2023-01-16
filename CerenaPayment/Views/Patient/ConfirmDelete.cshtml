@@ -1,0 +1,16 @@
+﻿@model PatientModel
+@{
+    ViewData["Title"] = "Apagar paciente";
+}
+
+<div class="text-center">
+    <h3>Apagar paciente</h3>
+    <p>Você realmente deseja apagar o(a) paciente "@Model.Nome"?</p>
+</div>
+
+<div class="text-center">
+    <div class="btn-group" role="group">
+        <a role="button" class="btn btn-outline-danger" asp-controller="Patient" asp-route-id="@Model.Id" asp-action="Delete">Apagar</a>
+        <a role="button" class="btn btn-outline-dark" asp-controller="Patient" asp-action="Index">Voltar</a>
+    </div>
+</div>

@@ -4,14 +4,14 @@ namespace CerenaPayment.Repository
 {
     public interface IPatientRepository
     {
-        PatientModel ListarPorId(int id);
+        PatientModel ListById(int id);
 
-        List<PatientModel> BuscarTodos();
+        List<PatientModel> SearchAll();
 
-        PatientModel Add (PatientModel contato);
+        PatientModel Add(PatientModel patient);
 
-        //PatientModel Atualizar(PatientModel contato);
+        PatientModel Update(PatientModel patient);
 
-        //bool Apagar(int id);
+        bool Delete(int id);
     }
 }

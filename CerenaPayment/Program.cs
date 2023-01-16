@@ -1,7 +1,21 @@
+using CerenaPayment.Data;
+using CerenaPayment.Repository;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("DataBase");
+
+builder.Services.AddEntityFrameworkSqlServer().AddDbContext<Context>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<ITherapyRepository, TherapyRepository>();
+
+
 
 var app = builder.Build();
 

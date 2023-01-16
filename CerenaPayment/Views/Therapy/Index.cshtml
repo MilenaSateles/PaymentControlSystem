@@ -1,0 +1,60 @@
+﻿@model List<PatientModel>;
+@{
+    ViewData["Title"] = "Listagem de pacientes";
+}
+
+<h1>Listagem de pacientes</h1>
+
+<div class="text-center">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-outline-info" role="button" asp-controller="Patient" asp-action="Create"> Adicionar novo paciente</a>
+    </div>
+    <br />
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-info" role="alert">
+            <button type="button" class="btn btn-light btn-sm close-alert" arial-label="Close">x</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-light btn-sm close-alert" arial-label="Close">x</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+    <br />
+
+    <table class="table" id="table-patient">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (PatientModel patient in Model)
+                {
+                    <tr>
+                        <th scope="row">@patient.Id</th>
+                        <td>@patient.Nome</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-outline-warning" asp-route-id="@patient.Id" asp-controller="Patient" asp-action="Edit">Editar</a>
+                                <a role="button" class="btn btn-outline-danger" asp-route-id="@patient.Id" asp-controller="Patient" asp-action="ConfirmDelete">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

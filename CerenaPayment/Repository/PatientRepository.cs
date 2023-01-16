@@ -21,14 +21,40 @@ namespace CerenaPayment.Repository
             return patient; 
         }
 
-        public List<PatientModel> BuscarTodos()
+        public List<PatientModel> SearchAll()
         {
             return _context.Patients.ToList();
         }
 
-        public PatientModel ListarPorId(int id)
+        public bool Delete(int id)
+        {
+            PatientModel patientDB = ListById(id);
+
+            if (patientDB == null)
+                throw new Exception("Não foi possível apagar o paciente :(");
+
+            _context.Patients.Remove(patientDB);
+            _context.SaveChanges();
+            return true;
+        }
+
+        public PatientModel ListById(int id)
         {
             return _context.Patients.FirstOrDefault(x => x.Id == id)!;
+        }
+
+        public PatientModel Update(PatientModel patient)
+        {
+            PatientModel patientDB = ListById(patient.Id);
+
+            if (patientDB == null)
+                throw new Exception("Houve um erro na atualização do contato :(");
+
+            patientDB.Nome = patient.Nome;
+          
+            _context.Patients.Update(patientDB);
+            _context.SaveChanges();
+            return patientDB;
         }
     }
 }

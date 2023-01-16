@@ -11,5 +11,6 @@ namespace CerenaPayment.Data
         
         //Mapeando no context:
         public DbSet<PatientModel> Patients { get; set; }
+        public DbSet<TherapyModel> Therapies { get; set; }
     }
 }
