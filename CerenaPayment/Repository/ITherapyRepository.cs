@@ -4,14 +4,16 @@ namespace CerenaPayment.Repository
 {
     public interface ITherapyRepository
     {
-        TherapyModel ListById(int id);
+        TherapyPerDayModel ListById(int id);
 
-        List<TherapyModel> SearchAll();
+        List<TherapyPerDayModel> SearchAll();
 
-        TherapyModel Add(TherapyModel therapy);
+        TherapyPerDayModel Add(TherapyPerDayModel therapy);
 
-        TherapyModel Update(TherapyModel therapy);
+        TherapyPerDayModel Update(TherapyPerDayModel therapy);
 
         bool Delete(int id);
+
+        List<TherapyPerDayModel> ListByDate(int day, int month, int year);
     }
 }

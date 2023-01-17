@@ -1,0 +1,52 @@
+﻿@using System.Globalization;
+@model DateViewModel;
+@{
+    ViewData["Title"] = "Adicionar terapia";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Adicionar terapia</h1>
+</div>
+
+<form asp-controller="Therapy" asp.action="Create" method="post">
+    <div class="form-group">
+        <label for="date">Data</label>
+       @* @{
+            string selectedDay = (Model.Date.Day).ToString();
+            string selectedMonth = Model.Date.Month;
+            string selectedYear = Model.Date.Year;
+            string selectedDate = selectedDay + "/" + selectedMonth + "/" + selectedYear;
+            DateTime parseSelectedDate = DateTime.ParseExact(selectedDate, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+        }*@
+        <input type="text" asp-for= "Date" class="form-control" placeholder="Data da terapia">
+        @Html.ValidationMessageFor(x => x.Date)
+    </div>
+    <div class="form-group">
+        <label for="time">Hora</label>
+        <input type="text" asp-for="TherapyPerDay.Time" class="form-control" placeholder="Informe o horário da terapia">
+        @Html.ValidationMessageFor(x => x.TherapyPerDay.Time)
+    </div>
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" asp-for="TherapyPerDay.Nome" class="form-control" placeholder="Informe o nome do paciente">
+        @Html.ValidationMessageFor(x => x.TherapyPerDay.Nome)
+    </div>
+    <div class="form-group">
+        <label for="sessions">Sessões</label>
+        <input type="text" asp-for="TherapyPerDay.Sessions" class="form-control" placeholder="Informe a quantidade de sessões">
+        @Html.ValidationMessageFor(x => x.TherapyPerDay.Sessions)
+    </div>
+    <div class="form-group">
+        <label for="value">Valor</label>
+        <input type="text" asp-for="TherapyPerDay.Value" class="form-control" placeholder="Informe o valor da sessão">
+        @Html.ValidationMessageFor(x => x.TherapyPerDay.Value)
+    </div>
+    <div class="form-group">
+        <label for="notes">Observações</label>
+        <input type="text" asp-for="TherapyPerDay.Notes" class="form-control" placeholder="Observações">
+    </div>
+    </br>
+
+    <button type="submit" class="btn btn-outline-info btn-block">Adicionar</button>
+    <a class="btn btn-outline-dark btn-block" asp-controller="TherapyPerDay" asp-action="Index" role="button">Voltar</a>
+</form>

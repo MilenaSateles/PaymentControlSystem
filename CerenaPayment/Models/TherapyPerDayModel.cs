@@ -2,11 +2,10 @@
 
 namespace CerenaPayment.Models
 {
-    public class TherapyModel
+    public class TherapyPerDayModel
     {
         public int Id { get; set; }
-        
-        [Required(ErrorMessage = "Informe a data da terapia.")]
+
         public DateTime Date { get; set; }
 
         [Required(ErrorMessage = "Informe o horário da terapia.")]
@@ -18,9 +17,17 @@ namespace CerenaPayment.Models
         [Required(ErrorMessage = "Informe a quantidade de sessões.")]
         public int Sessions { get; set; }
 
-        [Required(ErrorMessage = "Informe o valor por sessão. ")]
+        [Required(ErrorMessage = "Informe o valor da sessão. ")]
         public decimal Value { get; set; }
 
-        public string Notes { get; set; }
+        public string? Notes { get; set; } = default;
+
+        //public void NoNotes(string notes)
+        //{
+        //    if (Notes != null)         
+        //        Notes = notes;
+        //    else
+        //        Notes = default;
+        //}
     }
 }

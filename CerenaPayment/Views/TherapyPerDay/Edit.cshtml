@@ -1,0 +1,45 @@
+﻿@model TherapyPerDayModel;
+@{
+    ViewData["Title"] = "Atualizar terapia";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Atualizar terapia</h1>
+</div>
+
+<form asp-controller="Therapy" asp.action="Edit" method="post">
+
+    <div class="form-group">
+        <label for="date">Data</label>
+        <input type="text" asp-for="Date" class="form-control" placeholder="Informe a data da terapia">
+        @Html.ValidationMessageFor(x => x.Date)
+    </div>
+    <div class="form-group">
+        <label for="time">Hora</label>
+        <input type="text" asp-for="Time" class="form-control" placeholder="Informe o horário da terapia">
+        @Html.ValidationMessageFor(x => x.Time)
+    </div>
+    <div class="form-group">
+        <label for="nome">Nome</label>
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Informe o nome do paciente">
+        @Html.ValidationMessageFor(x => x.Nome)
+    </div>
+    <div class="form-group">
+        <label for="sessions">Sessões</label>
+        <input type="text" asp-for="Sessions" class="form-control" placeholder="Informe a quantidade de sessões">
+        @Html.ValidationMessageFor(x => x.Sessions)
+    </div>
+    <div class="form-group">
+        <label for="value">Valor</label>
+        <input type="text" asp-for="Value" class="form-control" placeholder="Informe o valor da sessão">
+        @Html.ValidationMessageFor(x => x.Value)
+    </div>
+    <div class="form-group">
+        <label for="notes">Observações</label>
+        <input type="text" asp-for="Notes" class="form-control" placeholder="Observações">
+    </div>
+    </br>
+
+    <button type="submit" class="btn btn-outline-info btn-block">Salvar alteração</button>
+    <a class="btn btn-outline-dark btn-block" asp-controller="TherapyPerDay" asp-action="Index" role="button">Voltar</a>
+</form>

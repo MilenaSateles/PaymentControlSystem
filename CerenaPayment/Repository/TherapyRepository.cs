@@ -12,7 +12,7 @@ namespace CerenaPayment.Repository
             _context = context;
         }
 
-        public TherapyModel Add(TherapyModel therapy)
+        public TherapyPerDayModel Add(TherapyPerDayModel therapy)
         {
             _context.Therapies.Add(therapy);
             _context.SaveChanges();
@@ -21,7 +21,7 @@ namespace CerenaPayment.Repository
 
         public bool Delete(int id)
         {
-            TherapyModel therapyDB = ListById(id);
+            TherapyPerDayModel therapyDB = ListById(id);
 
             if (therapyDB == null)
                 throw new Exception("Não foi possível apagar a terapia :(");
@@ -31,19 +31,19 @@ namespace CerenaPayment.Repository
             return true;
         }
 
-        public TherapyModel ListById(int id)
+        public TherapyPerDayModel ListById(int id)
         {
             return _context.Therapies.FirstOrDefault(x => x.Id == id)!;
         }
 
-        public List<TherapyModel> SearchAll()
+        public List<TherapyPerDayModel> SearchAll()
         {
             return _context.Therapies.ToList();
         }
 
-        public TherapyModel Update(TherapyModel therapy)
+        public TherapyPerDayModel Update(TherapyPerDayModel therapy)
         {
-            TherapyModel therapyDB = ListById(therapy.Id);
+            TherapyPerDayModel therapyDB = ListById(therapy.Id);
 
             if (therapyDB == null)
                 throw new Exception("Houve um erro na atualização da terapia :(");
@@ -53,6 +53,11 @@ namespace CerenaPayment.Repository
             _context.Therapies.Update(therapyDB);
             _context.SaveChanges();
             return therapyDB;
+        }
+
+        public List<TherapyPerDayModel> ListByDate(int day, int month, int year )
+        {
+            return _context.Therapies.Where(x => x.Date == new DateTime(day, month, year)).ToList();
         }
     }
 }
